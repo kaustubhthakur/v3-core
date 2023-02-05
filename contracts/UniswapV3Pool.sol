@@ -855,12 +855,12 @@ contract UniswapV3Pool is IUniswapV3Pool, NoDelegateCall {
         amount1 = amount1Requested > protocolFees.token1 ? protocolFees.token1 : amount1Requested;
 
         if (amount0 > 0) {
-            if (amount0 == protocolFees.token0) amount0--; // ensure that the slot is not cleared, for gas savings
+            if (amount0 == protocolFees.token0) --amount0; // ensure that the slot is not cleared, for gas savings
             protocolFees.token0 -= amount0;
             TransferHelper.safeTransfer(token0, recipient, amount0);
         }
         if (amount1 > 0) {
-            if (amount1 == protocolFees.token1) amount1--; // ensure that the slot is not cleared, for gas savings
+            if (amount1 == protocolFees.token1) --amount1; // ensure that the slot is not cleared, for gas savings
             protocolFees.token1 -= amount1;
             TransferHelper.safeTransfer(token1, recipient, amount1);
         }
